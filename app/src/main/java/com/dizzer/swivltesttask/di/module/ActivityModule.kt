@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.dizzer.swivltesttask.di.ActivityContext
 import com.dizzer.swivltesttask.di.PerActivity
 import com.dizzer.swivltesttask.mvp.ui.main.presenter.MainPresenter
+import com.dizzer.swivltesttask.mvp.ui.userDetails.presenter.UserDetailsPresenter
 import dagger.Module
 import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
@@ -37,5 +38,14 @@ class ActivityModule(private val mActivity: AppCompatActivity) {
         compositeDisposable: CompositeDisposable, application: Application
     ): MainPresenter {
         return MainPresenter(retrofit, compositeDisposable, application)
+    }
+
+    @Provides
+    @PerActivity
+    internal fun provideUserDetailsPresenter(
+        retrofit: Retrofit,
+        compositeDisposable: CompositeDisposable, application: Application
+    ): UserDetailsPresenter {
+        return UserDetailsPresenter(retrofit, compositeDisposable, application)
     }
 }

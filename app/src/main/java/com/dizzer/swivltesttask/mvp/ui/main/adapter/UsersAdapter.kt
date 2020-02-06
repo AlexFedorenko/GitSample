@@ -47,6 +47,7 @@ class UsersAdapter(private val mListener: OnUserClickListener ) :
             if (context != null && models[position].avatar_url.isNullOrEmpty().not()) {
                 Glide.with(context!!)
                     .load(models[position].avatar_url)
+                    .placeholder(context!!.resources.getDrawable(R.drawable.ic_avatar_placeholder, null))
                     .apply(RequestOptions.circleCropTransform())
                     .into(itemView.iv_user_avatar)
             }

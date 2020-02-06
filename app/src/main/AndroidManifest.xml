@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".mvp.ui.userDetails.view.UserDetailsActivity"
+            android:parentActivityName=".mvp.ui.main.view.MainActivity"/>
     </application>
 
 </manifest>
