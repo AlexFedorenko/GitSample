@@ -53,4 +53,12 @@ class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnU
     override fun onRefresh() {
         presenter.getUsers()
     }
+
+    override fun loadNewUsers() {
+        presenter.loadNewUsers()
+    }
+
+    override fun addUsers(data: List<UserModel>) {
+        adapter.addNewItems(data)
+    }
 }

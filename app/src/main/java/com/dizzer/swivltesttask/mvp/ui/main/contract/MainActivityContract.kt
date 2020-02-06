@@ -10,6 +10,7 @@ interface MainActivityContract {
 
     interface View : BaseView {
         fun setUsers(data: List<UserModel>)
+        fun addUsers(data: List<UserModel>)
         fun openUser(intent: Intent)
     }
 
@@ -17,5 +18,6 @@ interface MainActivityContract {
         fun setView(view: View)
         fun getUsers()
         fun onUserClick(position: Int)
+        fun loadNewUsers()
     }
 }

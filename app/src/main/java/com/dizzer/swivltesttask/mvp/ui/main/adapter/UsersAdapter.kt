@@ -20,6 +20,12 @@ class UsersAdapter(private val mListener: OnUserClickListener ) :
             notifyDataSetChanged()
         }
 
+    fun addNewItems(data: List<UserModel>) {
+        val currentSize = models.size
+        (models as ArrayList).addAll(data)
+        notifyItemRangeInserted(currentSize, data.size)
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): ViewHolder {
         val view =
             LayoutInflater.from(viewGroup.context)
@@ -30,6 +36,8 @@ class UsersAdapter(private val mListener: OnUserClickListener ) :
 
     interface OnUserClickListener {
         fun onUserClick(position: Int)
+
+        fun loadNewUsers()
     }
 
     override fun onBindViewHolder(viewHolder: ViewHolder, i: Int) {
@@ -43,6 +51,8 @@ class UsersAdapter(private val mListener: OnUserClickListener ) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(position: Int) {
+            if (position >= models.size - 5)
+                mListener.loadNewUsers()
             itemView.setOnClickListener { mListener.onUserClick(position) }
             if (context != null && models[position].avatar_url.isNullOrEmpty().not()) {
                 Glide.with(context!!)
