@@ -15,7 +15,8 @@
         android:theme="@style/AppTheme"
         android:name=".App"
         android:fullBackupContent="true">
-        <activity android:name=".mvp.ui.main.view.MainActivity">
+        <activity android:name=".mvp.ui.main.view.MainActivity"
+            android:label="Users">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
