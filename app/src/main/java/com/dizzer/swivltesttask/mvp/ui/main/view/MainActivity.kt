@@ -2,6 +2,7 @@ package com.dizzer.swivltesttask.mvp.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dizzer.swivltesttask.R
 import com.dizzer.swivltesttask.mvp.base.BaseActivity
 import com.dizzer.swivltesttask.mvp.models.UserModel
@@ -11,7 +12,8 @@ import com.dizzer.swivltesttask.mvp.ui.main.presenter.MainPresenter
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnUserClickListener {
+class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnUserClickListener,
+    SwipeRefreshLayout.OnRefreshListener{
 
     @Inject
     lateinit var presenter: MainPresenter
@@ -22,6 +24,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnU
         setContentView(R.layout.activity_main)
         presenter.setView(this)
         rv_users.adapter = adapter
+        srl_holder.setOnRefreshListener(this)
         presenter.getUsers()
     }
 
@@ -36,6 +39,7 @@ class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnU
 
     override fun setUsers(data: List<UserModel>) {
         adapter.models = data
+        srl_holder.isRefreshing = false
     }
 
     override fun onUserClick(position: Int) {
@@ -44,5 +48,9 @@ class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnU
 
     override fun openUser(intent: Intent) {
         startActivity(intent)
+    }
+
+    override fun onRefresh() {
+        presenter.getUsers()
     }
 }
