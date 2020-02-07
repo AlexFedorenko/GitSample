@@ -15,6 +15,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="16dp"
+        android:transitionName="tr_avatar"
         tools:src="@drawable/ic_avatar_placeholder"
         android:contentDescription="@string/avatar_description"/>
 

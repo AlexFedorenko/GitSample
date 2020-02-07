@@ -2,6 +2,7 @@ package com.dizzer.swivltesttask.mvp.ui.main.view
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.app.ActivityOptionsCompat
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dizzer.swivltesttask.R
 import com.dizzer.swivltesttask.mvp.base.BaseActivity
@@ -56,7 +57,13 @@ class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnU
     }
 
     override fun openUser(intent: Intent) {
-        startActivity(intent)
+        if (adapter.sharedAvatar != null) {
+            val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                this, adapter.sharedAvatar!!, "tr_avatar")
+            startActivity(intent, options.toBundle())
+        }
+        else
+            startActivity(intent)
     }
 
     override fun onRefresh() {

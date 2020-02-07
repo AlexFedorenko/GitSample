@@ -17,6 +17,7 @@
             android:layout_height="160dp"
             android:layout_marginTop="32dp"
             android:contentDescription="@string/avatar_description"
+            android:transitionName="tr_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

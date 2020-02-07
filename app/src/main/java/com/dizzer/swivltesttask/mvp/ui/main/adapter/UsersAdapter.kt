@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.item_user.view.*
 class UsersAdapter(private val mListener: OnUserClickListener ) :
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
     private var context: Context? = null
+    var sharedAvatar: View? = null
     var models: List<UserModel> = arrayListOf()
         set(value) {
             field = value
@@ -53,7 +54,10 @@ class UsersAdapter(private val mListener: OnUserClickListener ) :
         fun bind(position: Int) {
             if (position >= models.size - 5)
                 mListener.loadNewUsers()
-            itemView.setOnClickListener { mListener.onUserClick(position) }
+            itemView.setOnClickListener {
+                mListener.onUserClick(position)
+                sharedAvatar = itemView.iv_user_avatar
+            }
             if (context != null && models[position].avatar_url.isNullOrEmpty().not()) {
                 Glide.with(context!!)
                     .load(models[position].avatar_url)
