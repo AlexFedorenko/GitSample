@@ -25,7 +25,16 @@ class MainActivity : BaseActivity(), MainActivityContract.View, UsersAdapter.OnU
         presenter.setView(this)
         rv_users.adapter = adapter
         srl_holder.setOnRefreshListener(this)
-        presenter.getUsers()
+
+        if (savedInstanceState?.containsKey("presenter_data") == true)
+            presenter.restorePresenterData(savedInstanceState.getParcelableArrayList("presenter_data"))
+        else
+            presenter.getUsers()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList("presenter_data", presenter.getPresenterData())
+        super.onSaveInstanceState(outState)
     }
 
     override fun performDependencyInjection() {

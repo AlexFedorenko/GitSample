@@ -19,5 +19,8 @@ interface MainActivityContract {
         fun getUsers()
         fun onUserClick(position: Int)
         fun loadNewUsers()
+
+        fun getPresenterData() : List<UserModel>?
+        fun restorePresenterData(data : ArrayList<UserModel>?)
     }
 }

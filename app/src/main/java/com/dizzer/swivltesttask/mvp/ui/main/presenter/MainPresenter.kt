@@ -87,4 +87,11 @@ class MainPresenter(
             }
         }
     }
+
+    override fun getPresenterData(): ArrayList<UserModel>? = models as ArrayList<UserModel>?
+
+    override fun restorePresenterData(data: ArrayList<UserModel>?) {
+        models = data
+        models?.let { view?.setUsers(it) }
+    }
 }
